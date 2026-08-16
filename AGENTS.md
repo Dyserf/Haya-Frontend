@@ -26,7 +26,6 @@
 - Base URL `https://api.usehaya.io/api/v1` is hardcoded. No env vars are used anywhere in the repo.
 - Use the shared `api` axios instance; it auto-attaches the JWT from the auth cookie and handles 401 (token expiry) and 402 (payment) globally. Don't add auth headers or payment/error toasts in individual services.
 - Backend calls audits "analyses". A request interceptor rewrites any `audit*` request key (body, params, FormData) to `analysis*`. When adding audit payloads, name fields `audit*`; the backend receives them as `analysis*`.
-- `invitationCode` is auto-injected on `/auth/register`, `/auth/login`, `/auth/verify` via a UI prompt.
 
 ## Auth & route protection
 

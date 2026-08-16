@@ -2,7 +2,6 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useAuthStore } from "@/features/auth/auth.store";
 import { getAuth } from "@/features/auth/auth-cookie";
-import { getInvitationCode } from "@/features/auth/components/invitation-code-prompt";
 import { setOnboardingFormDialogView } from "@/features/auth/components/onboarding-dialog";
 import { triggerUpgradePlan } from "@/features/pricing/components/upgrade-plan-dialog";
 
@@ -38,18 +37,6 @@ api.interceptors.request.use(async (config) => {
         config.data.delete(key);
       }
     }
-  }
-
-  return config;
-});
-
-// Temporary: Intercept auth endpoints that require invitation code and prompt user to enter one
-api.interceptors.request.use(async (config) => {
-  const requiredEndpoints = ["/auth/register", "/auth/login", "/auth/verify"];
-
-  if (requiredEndpoints.some((path) => config.url?.endsWith(path))) {
-    const { code } = await getInvitationCode();
-    config.data.invitationCode = code;
   }
 
   return config;

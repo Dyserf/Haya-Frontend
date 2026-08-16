@@ -1,6 +1,5 @@
 "use client";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { InvitationCodePrompt } from "@/features/auth/components/invitation-code-prompt";
 import { OnboardingFormDialog } from "@/features/auth/components/onboarding-dialog";
 import { SolanaProvider } from "@/features/auth/components/solana-provider";
 import { BillingSuccessDialog } from "@/features/pricing/components/billing-success-dialog";
@@ -24,7 +23,6 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         <UpgradePlanDialog />
         <BillingSuccessDialog />
         <ChangeUsernameDialogGuard />
-        <InvitationCodePrompt />
       </SolanaProvider>
     </QueryClientProvider>
   );

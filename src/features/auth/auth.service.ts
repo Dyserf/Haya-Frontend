@@ -8,7 +8,6 @@ import type {
   VerifyOtp,
 } from "./auth.type";
 import { getAuth } from "./auth-cookie";
-import { getInvitationCode } from "./components/invitation-code-prompt";
 
 async function signUpEmail(payload: SignUpEmail) {
   const response = await api.post("/auth/register", payload);
@@ -22,11 +21,7 @@ async function login(payload: LoginEmail) {
 
 async function redirectToGoogleAuth() {
   const baseUrl = api.defaults.baseURL || window.location.host;
-  // Temporary: Intercept auth endpoints that require invitation code and prompt user to enter one
-  const { code } = await getInvitationCode();
-  if (!code) return;
-
-  window.location.href = `${baseUrl.replace(/\/*$/, "/auth/google")}?invitationCode=${code}`;
+  window.location.href = `${baseUrl.replace(/\/*$/, "/auth/google")}`;
 }
 
 async function exchangeGoogleAuthCodeForToken(code: string) {
