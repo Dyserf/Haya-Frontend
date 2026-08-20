@@ -245,7 +245,8 @@
     input,
     textarea,
     select {
-      font-size: 16px;
+      /* On IOS, the browser automatically zooms in the page when an input with a font-size below 16px is focused. This is the fix for it */
+      font-size: 16px !important;
     }
   }
 }
