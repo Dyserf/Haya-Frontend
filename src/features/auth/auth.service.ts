@@ -35,7 +35,7 @@ async function logout() {
 }
 
 async function verifyOtp(payload: VerifyOtp) {
-  const response = await api.get(`/auth/verify-email/${payload.code}`);
+  const response = await api.post("/auth/verify-email", payload);
   return response.data;
 }
 
@@ -50,10 +50,7 @@ async function forgotPassword(payload: ForgotPassword) {
 }
 
 async function resetPassword(payload: ResetPassword) {
-  const response = await api.post("/auth/reset-password", {
-    ...payload,
-    token: payload.code,
-  });
+  const response = await api.post("/auth/reset-password", payload);
   return response.data;
 }
 

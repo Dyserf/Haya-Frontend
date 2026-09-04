@@ -29,6 +29,7 @@ export const signUpEmailSchema = z
   });
 
 export const verifyOtpSchema = z.object({
+  email: z.email(),
   code: z.string().length(6, { message: "OTP must be 6 characters" }),
 });
 
@@ -47,6 +48,7 @@ export const forgotPasswordSchema = z.object({
 
 export const resetPasswordSchema = z
   .object({
+    email: z.email(),
     code: z.string().length(6, { message: "OTP must be 6 characters" }),
     password: passwordSchema,
     confirmPassword: z.string(),

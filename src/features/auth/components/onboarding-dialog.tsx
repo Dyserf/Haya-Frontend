@@ -113,6 +113,7 @@ export const OnboardingFormDialog = ({
 
   const resetPasswordForm = useForm<ResetPassword>({
     defaultValues: {
+      email: "",
       code: "",
       password: "",
       confirmPassword: "",
@@ -150,7 +151,12 @@ export const OnboardingFormDialog = ({
               onClick={() => {
                 resendVerification.mutate(
                   { email },
-                  { onSuccess: () => setView("verifyOtp") },
+                  {
+                    onSuccess: () => {
+                      verifyEmailForm.setValue("email", email);
+                      setView("verifyOtp");
+                    },
+                  },
                 );
                 toast.dismiss("login");
               }}
@@ -221,7 +227,10 @@ export const OnboardingFormDialog = ({
               form={signUpEmailForm}
               onSubmit={(values) =>
                 signUpEmail.mutate(values, {
-                  onSuccess: () => setView("verifyOtp"),
+                  onSuccess: () => {
+                    verifyEmailForm.setValue("email", values.email);
+                    setView("verifyOtp");
+                  },
                 })
               }
               isLoading={signUpEmail.isPending}
@@ -280,7 +289,10 @@ export const OnboardingFormDialog = ({
               form={forgotPasswordForm}
               onSubmit={(values) =>
                 forgotPassword.mutate(values, {
-                  onSuccess: () => setView("resetPassword"),
+                  onSuccess: () => {
+                    resetPasswordForm.setValue("email", values.email);
+                    setView("resetPassword");
+                  },
                 })
               }
               isLoading={forgotPassword.isPending}
