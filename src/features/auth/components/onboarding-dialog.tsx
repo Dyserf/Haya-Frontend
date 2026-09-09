@@ -244,21 +244,26 @@ export const OnboardingFormDialog = ({
         {view === "signUpWallet" && <SignUpWalletForm />}
 
         {view === "verifyOtp" && (
-          <VerifyOtpForm
-            form={verifyEmailForm}
-            onSubmit={(values) => {
-              verifyOtp.mutate(values, {
-                onSuccess: () => setView("login"),
-              });
-            }}
-            onResend={() => {
-              resendVerification.mutate({
-                email: signUpEmailForm.getValues("email"),
-              });
-            }}
-            isVerifing={verifyOtp.isPending}
-            isResending={resendVerification.isPending}
-          />
+          <div className="flex flex-col gap-1">
+            <VerifyOtpForm
+              form={verifyEmailForm}
+              onSubmit={(values) => {
+                verifyOtp.mutate(values, {
+                  onSuccess: () => setView("login"),
+                });
+              }}
+              onResend={() => {
+                resendVerification.mutate({
+                  email: signUpEmailForm.getValues("email"),
+                });
+              }}
+              isVerifing={verifyOtp.isPending}
+              isResending={resendVerification.isPending}
+            />
+            <Button appearance="link" onClick={() => setView("login")}>
+              Already verified, or already have an account? Log in instead
+            </Button>
+          </div>
         )}
 
         {view === "login" && (

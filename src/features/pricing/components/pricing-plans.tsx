@@ -3,6 +3,7 @@ import { CloseCircle, TickCircle } from "iconsax-reactjs";
 import { useState } from "react";
 import { QueryState } from "@/components/query-states";
 import { cn, toTitleCase } from "@/lib/utils";
+import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
 import { useCurrentPlan, usePlans, useSubscribeToPlan } from "../pricing.hook";
 
@@ -167,6 +168,15 @@ export const PricingPlans = () => {
               <div
                 key={plan.key}
                 className="flex w-full flex-col gap-4 rounded-xl border bg-card p-4"
+                style={
+                  isCurrentPlan
+                    ? {
+                        border: "1px solid transparent",
+                        background:
+                          "linear-gradient(var(--color-card), var(--color-card)) padding-box, var(--colorful-gradient) border-box",
+                      }
+                    : undefined
+                }
               >
                 {/* Name and price section */}
                 <div
@@ -177,9 +187,16 @@ export const PricingPlans = () => {
                       "linear-gradient(var(--color-background), var(--color-background)) padding-box, var(--colorful-gradient) border-box",
                   }}
                 >
-                  <h2 className="font-bold text-2xl text-primary">
-                    {plan.displayName}
-                  </h2>
+                  <div className="flex items-center justify-between gap-2">
+                    <h2 className="font-bold text-2xl text-primary">
+                      {plan.displayName}
+                    </h2>
+                    {isCurrentPlan && (
+                      <Badge color="colorful" appearance="soft">
+                        Current Plan
+                      </Badge>
+                    )}
+                  </div>
                   <div className="flex items-center">
                     <span className="font-bold text-2xl">
                       ${plan.priceUsdMonthly}
