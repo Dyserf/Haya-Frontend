@@ -152,6 +152,18 @@ export const AppSidebar = () => {
 
           return null;
         })}
+
+        {/* Announcement for upcoming analytics imports */}
+        <div className="mx-4 mt-10 mb-4 rounded-xl border border-primary/30 bg-card p-4 group-data-[collapsible=icon]:hidden">
+          <p className="font-bold text-lg text-primary leading-tight">
+            New Update Coming
+          </p>
+          <p className="mt-2 text-muted-foreground text-sm leading-relaxed">
+            Soon you&apos;ll import from PostHog, Amplitude, and Google
+            Analytics, and Haya will find the patterns already hiding in your
+            history.
+          </p>
+        </div>
       </SidebarContent>
 
       <SidebarFooter>
